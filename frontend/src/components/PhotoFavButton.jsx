@@ -3,8 +3,10 @@ import React, { useCallback, useState } from 'react';
 import { FavIcon } from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-function PhotoFavButton() {
-    const [isFavorite, setIsFavorite] = useState(false);
+function PhotoFavButton(props) {
+    const { onClickLikes, liked, photoId } = props;
+    // will only be called once
+    const [isFavorite, setIsFavorite] = useState(liked);
 
     const handleToggleFavorite = useCallback(() => {
         console.log('Toggling favorite...');
