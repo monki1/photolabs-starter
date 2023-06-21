@@ -4,14 +4,14 @@ import '../styles/HomeRoute.scss';
 import TopNavigationBar from "../components/TopNavigationBar";
 import PhotoList from "../components/PhotoList";
 
-const HomeRoute = () => {
-
+const HomeRoute = (props) => {
+    const {photos, topics} = props;
 
   return (
       <div className='home-route'>
-        <TopNavigationBar  />
+        <TopNavigationBar  topics={topics}/>
 
-        <PhotoList  />
+        <PhotoList photos={photos} />
       </div>
   );
 };
