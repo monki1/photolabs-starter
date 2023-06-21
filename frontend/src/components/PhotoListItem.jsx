@@ -4,6 +4,7 @@ import '../styles/PhotoListItem.scss';
 import PhotoFavButton from './PhotoFavButton';
 
 const PhotoListItem = (props = PhotoListItem.defaultProps) => {
+    const { onLikePhoto, liked, id } = props;
     return (
         <div className="photo-list__item">
             <PhotoFavButton />

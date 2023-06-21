@@ -4,7 +4,7 @@ import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
 
 const PhotoList = (props=PhotoList.defaultProps) => {
-  const { photos } = props;
+  const { photos, onLikePhoto } = props;
 
   return (
       <ul className="photo-list">
@@ -16,6 +16,7 @@ const PhotoList = (props=PhotoList.defaultProps) => {
                   imageSource={photo.urls.regular}
                   username={photo.user.name}
                   profile={photo.user.profile}
+                  onLikePhoto={onLikePhoto}
               />
             </li>
         ))}

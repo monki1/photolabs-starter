@@ -24,6 +24,7 @@ const useAppData = () => {
 
     // Function to update the liked photos array
     const onLikePhoto = (status, photoId) => {
+        console.log('Toggling favorite...');
         if (status) {
             dispatch({ type: 'SET_LIKED_PHOTOS', payload: [...likedPhotos, photoId] });
         } else {

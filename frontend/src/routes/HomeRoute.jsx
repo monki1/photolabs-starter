@@ -5,13 +5,13 @@ import TopNavigationBar from "../components/TopNavigationBar";
 import PhotoList from "../components/PhotoList";
 
 const HomeRoute = (props) => {
-    const {photos, topics} = props;
+    const {photos, topics, likedPhotos, onLikePhoto} = props;
 
   return (
       <div className='home-route'>
-        <TopNavigationBar  topics={topics}/>
+        <TopNavigationBar  topics={topics} likedPhotos={likedPhotos}/>
 
-        <PhotoList photos={photos} />
+        <PhotoList photos={photos} onLikePhoto={onLikePhoto} />
       </div>
   );
 };
