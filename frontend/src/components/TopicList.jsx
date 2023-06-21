@@ -2,7 +2,6 @@ import React from 'react';
 
 import '../styles/TopicList.scss';
 import TopicListItem from "./TopicListItem";
-import PhotoFavButton from "./PhotoFavButton";
 
 const TopicList = (props=TopicList.defaultProps) => {
   const {topics} = props;
