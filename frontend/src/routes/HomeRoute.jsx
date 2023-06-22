@@ -22,6 +22,9 @@ const HomeRoute = (props) => {
               <PhotoDetailsModal
                   photo={selectedPhoto}
                   onClose={closeModal}
+                  likedPhotos={likedPhotos}
+                    onLikePhoto={onLikePhoto}
+                  onClickPhoto={openModal}
               />
           )}
       </div>

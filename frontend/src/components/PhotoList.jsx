@@ -4,14 +4,14 @@ import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
 
 const PhotoList = (props) => {
-  const { photos, onLikePhoto, likedPhotos } = props;
+  const { photos, onLikePhoto, likedPhotos , onClickPhoto} = props;
 
   return (
       <ul className="photo-list">
         {photos.map((photo) => {
           const liked = likedPhotos.includes(photo.id);
-          const onClickPhoto = () => {
-            props.onClickPhoto(photo);
+          const onClickPhoto2 = () => {
+            onClickPhoto(photo);
           }
           return (
               <li key={photo.id} className="photo-list__item">
@@ -23,7 +23,8 @@ const PhotoList = (props) => {
                     profile={photo.user.profile}
                     onLikePhoto={onLikePhoto}
                     liked={liked}
-                    onClickPhoto={onClickPhoto}
+                    onClickPhoto={onClickPhoto2}
+                    likedPhotos={likedPhotos}
                 />
               </li>
           );
