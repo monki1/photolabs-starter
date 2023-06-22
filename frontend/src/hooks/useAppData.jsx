@@ -1,43 +1,64 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
+import axios from 'axios';
 
-// Initial state of the application
+const API_URL = '/api';
+const PHOTO_URL = `${API_URL}/photos`;
+const TOPIC_URL = `${API_URL}/topics`;
+
 const initialState = {
-    likedPhotos: [],
+    likedPhotos: { arr: [] },
+    photos: { arr: [] },
+    topics: { arr: [] },
+    updatedAt: null
 };
 
-// Reducer function to manage state updates
 const reducer = (state, action) => {
     switch (action.type) {
         case 'SET_LIKED_PHOTOS':
-            return { ...state, likedPhotos: action.payload };
+            return { ...state, likedPhotos: action.payload, updatedAt: Date.now() };
+        case 'SET_PHOTO_DATA':
+            return { ...state, photos: action.payload, updatedAt: Date.now() };
+        case 'SET_TOPIC_DATA':
+            return { ...state, topics: action.payload, updatedAt: Date.now() };
         default:
-            throw new Error(`Unhandled action type: ${action.type}`);
+            return state; // Return current state for unknown action types
     }
 };
 
 const useAppData = () => {
-    // Initialize state and dispatch function using the reducer
-    const [state, dispatch] = useReducer(reducer, initialState, undefined);
+    const [state, dispatch] = useReducer(reducer, initialState,);
 
-    // Destructure state value for easier access
     const { likedPhotos } = state;
 
-    // Function to update the liked photos array
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const photosResponse = await axios.get(PHOTO_URL);
+                const topicsResponse = await axios.get(TOPIC_URL);
+
+                dispatch({ type: 'SET_PHOTO_DATA', payload: { arr: photosResponse.data, updatedAt: Date.now() } });
+                dispatch({ type: 'SET_TOPIC_DATA', payload: { arr: topicsResponse.data, updatedAt: Date.now() } });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     const onLikePhoto = (status, photoId) => {
         console.log('Toggling favorite...');
         if (status) {
-            dispatch({ type: 'SET_LIKED_PHOTOS', payload: [...likedPhotos, photoId] });
+            dispatch({ type: 'SET_LIKED_PHOTOS', payload: { arr: [...likedPhotos.arr, photoId], updatedAt: Date.now() } });
         } else {
-            dispatch({
-                type: 'SET_LIKED_PHOTOS',
-                payload: likedPhotos.filter(id => id !== photoId),
-            });
+            dispatch({ type: 'SET_LIKED_PHOTOS', payload: { arr: likedPhotos.arr.filter(id => id !== photoId) } });
         }
     };
 
-    // Return the liked photos array and the onLikePhoto function
+    console.log('state', state);
+
     return {
-        likedPhotos,
+        state,
         onLikePhoto,
     };
 };

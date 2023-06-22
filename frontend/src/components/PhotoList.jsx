@@ -8,8 +8,8 @@ const PhotoList = (props) => {
 
   return (
       <ul className="photo-list">
-        {photos.map((photo) => {
-          const liked = likedPhotos.includes(photo.id);
+        {photos.arr.map((photo) => {
+          const liked = likedPhotos.arr.includes(photo.id);
           const onClickPhoto2 = () => {
             onClickPhoto(photo);
           }
