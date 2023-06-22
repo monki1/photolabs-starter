@@ -10,6 +10,9 @@ const PhotoList = (props) => {
       <ul className="photo-list">
         {photos.map((photo) => {
           const liked = likedPhotos.includes(photo.id);
+          const onClickPhoto = () => {
+            props.onClickPhoto(photo);
+          }
           return (
               <li key={photo.id} className="photo-list__item">
                 <PhotoListItem
@@ -20,6 +23,7 @@ const PhotoList = (props) => {
                     profile={photo.user.profile}
                     onLikePhoto={onLikePhoto}
                     liked={liked}
+                    onClickPhoto={onClickPhoto}
                 />
               </li>
           );
