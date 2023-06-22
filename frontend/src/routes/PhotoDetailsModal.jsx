@@ -25,14 +25,14 @@ export const PhotoDetailsModal = (props) => {
             </button>
 
             <div className='photo-details-modal--images'>
-                <PhotoFavButton photoId={photo.id} onClick={onLikePhoto} liked={likedPhotos.includes(photo.id)} />
+                <PhotoFavButton photoId={photo.id} onClick={onLikePhoto} liked={likedPhotos.arr.includes(photo.id)} />
                 <img className='photo-details-modal--image' src={photo.urls.regular} alt="Selected Photo" />
                 <h2>{photo.user.name}</h2>
                 <hr className='photo-details-modal-line' />
 
                 <header className='photo-details-modal--header'>Similar Photos</header>
                 <PhotoList
-                    photoData={similarPhotos}
+                    photos={{arr: similarPhotos.map((photo) => photo[1])}}
                     onLikePhoto={onLikePhoto}
                     likedPhotos={likedPhotos}
                     onClickPhoto={onClickPhoto}
