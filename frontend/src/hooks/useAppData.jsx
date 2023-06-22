@@ -38,7 +38,7 @@ const useAppData = () => {
     // Return the liked photos array and the onLikePhoto function
     return {
         likedPhotos,
-        onClickLikes: onLikePhoto
+        onLikePhoto,
     };
 };
 

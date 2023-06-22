@@ -4,11 +4,12 @@ import { FavIcon } from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton(props) {
-    const { onClickLikes, liked, photoId } = props;
+    const { onClick, liked} = props;
     // will only be called once
     const [isFavorite, setIsFavorite] = useState(liked);
 
     const handleToggleFavorite = useCallback(() => {
+        onClick();
         console.log('Toggling favorite...');
         setIsFavorite((prevIsFavorite) => {
             console.log('Previous favorite state:', prevIsFavorite);

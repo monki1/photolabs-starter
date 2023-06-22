@@ -3,26 +3,32 @@ import PhotoListItem from './PhotoListItem';
 
 import '../styles/PhotoList.scss';
 
-const PhotoList = (props=PhotoList.defaultProps) => {
-  const { photos, onLikePhoto } = props;
+const PhotoList = (props) => {
+  const { photos, onLikePhoto, likedPhotos } = props;
 
   return (
       <ul className="photo-list">
-        {photos.map((photo) => (
-            <li key={photo.id} className="photo-list__item">
-              <PhotoListItem
-                  id={photo.id}
-                  location={photo.location}
-                  imageSource={photo.urls.regular}
-                  username={photo.user.name}
-                  profile={photo.user.profile}
-                  onLikePhoto={onLikePhoto}
-              />
-            </li>
-        ))}
+        {photos.map((photo) => {
+          const liked = likedPhotos.includes(photo.id);
+          return (
+              <li key={photo.id} className="photo-list__item">
+                <PhotoListItem
+                    id={photo.id}
+                    location={photo.location}
+                    imageSource={photo.urls.regular}
+                    username={photo.user.name}
+                    profile={photo.user.profile}
+                    onLikePhoto={onLikePhoto}
+                    liked={liked}
+                />
+              </li>
+          );
+        })}
       </ul>
   );
 };
+
+
 
 PhotoList.defaultProps = {
   photos: [

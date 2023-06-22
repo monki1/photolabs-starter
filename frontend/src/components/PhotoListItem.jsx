@@ -5,9 +5,13 @@ import PhotoFavButton from './PhotoFavButton';
 
 const PhotoListItem = (props = PhotoListItem.defaultProps) => {
     const { onLikePhoto, liked, id } = props;
+    const onClickHandler = function () {
+        onLikePhoto(!liked, id);
+        console.log("onConsole", onLikePhoto);
+    }
     return (
         <div className="photo-list__item">
-            <PhotoFavButton />
+            <PhotoFavButton onClick={onClickHandler} isFavorite={liked} />
             <div className="photo-list__image-container">
                 <img className="photo-list__image" src={props.imageSource} alt={`Photo by ${props.username}`} />
             </div>
